@@ -3,21 +3,8 @@ int dialogWord[2] = {207, 414};
 
 
 // user input pin, output of choreography switch goes here
-int inputA = 0;
-int outputA = 1;
-
-int inputB = 2;
-int outputB = 3;
-
-int inputC = 4;
-int outputC = 5;
-
-int inputD = 6;
-int outputD = 7;
-
-int inputE = 8;
-int outputE = 9;
-
+int inputA = 2;
+int outputA = 3;
 
 // function to create placeholder phrases; 4 possible phrases; tone(Pin, Frequency, Duration); audioPin = audio output on specified pin
 int dialogPhrase(int x, int y, int audioPin) {
@@ -30,7 +17,7 @@ int dialogPhrase(int x, int y, int audioPin) {
   }
 
 // list of unused pins
-int unused[18] = {10, 11, 12, 13, A0, A1, A2, A3, A4, A5};
+int unused[18] = {0, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, A0, A1, A2, A3, A4, A5};
 // size of unused pins list
 int unused_length = sizeof(unused) / sizeof(int);
 
@@ -48,17 +35,6 @@ void setup() {
 pinMode(inputA, INPUT);
 pinMode(outputA, OUTPUT);
 
-pinMode(inputB, INPUT);
-pinMode(outputB, OUTPUT);
-
-pinMode(inputC, INPUT);
-pinMode(outputC, OUTPUT);
-
-pinMode(inputD, INPUT);
-pinMode(outputD, OUTPUT);
-
-pinMode(inputE, INPUT);
-pinMode(outputE, OUTPUT);
 pullup();
 }
 
@@ -68,17 +44,5 @@ void loop() {
   // listen on userPin for input; ATmega pins are set to INPUT by default
   if (digitalRead(inputA) == logic) {
     dialogPhrase(dialogWord[0], dialogWord[1], outputA);
-  }
-  if (digitalRead(inputB) == logic) {
-    dialogPhrase(dialogWord[1], dialogWord[0], outputB);
-  }
-  if (digitalRead(inputC) == logic) {
-    dialogPhrase(dialogWord[1], dialogWord[1], outputC);
-  }
-  if (digitalRead(inputD) == logic) {
-    dialogPhrase(dialogWord[0], dialogWord[0], outputD);
-  }
-  if (digitalRead(inputE) == logic) {
-    dialogPhrase(dialogWord[1], dialogWord[1], outputE);
   }
 }
