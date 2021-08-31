@@ -43,7 +43,7 @@ audio.speakerPin = 9;
 audio.setVolume(7);
 audio.loop(1);
 audio.quality(1);
- audio.play("TU-TRE~1.WAV");
+ audio.play("tree.wav");
  
 }
  
