@@ -54,7 +54,7 @@ void loop(){
 
   if(Serial.available()){    
     if(Serial.read() == 'p'){ //send the letter p over the serial monitor to start playback
-      audio.play("tree16.wav");
+      audio.play("tr32.wav");
   }
 
    }
