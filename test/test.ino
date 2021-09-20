@@ -14,7 +14,8 @@ SdFile root;
 const int chipSelect = 10;
 
 void setup(){
-
+  pinMode(2, INPUT);
+  pinMode(3, OUTPUT);
   audio.speakerPin = 9; //5,6,11 or 46 on Mega, 9 on Uno, Nano, etc
 
   Serial.begin(115200);
@@ -23,7 +24,7 @@ void setup(){
     return;   // don't do anything more if not
   }
   audio.setVolume(1);
-  audio.quality(2);
+  audio.quality(1);
 
    // we'll use the initialization code from the utility libraries
   // since we're just testing if the card is working!
@@ -46,19 +47,16 @@ void setup(){
   // list all files in the card with date and size
   root.openRoot(volume);
   root.ls(LS_R | LS_DATE | LS_SIZE);
+   
 }
 
 
 
 void loop(){  
 
-  if(Serial.available()){    
-    if(Serial.read() == 'p'){ //send the letter p over the serial monitor to start playback
-      audio.play("tr32.wav");
-  }
-
-   }
-  if(Serial.read() == 's'){ //send the letter p over the serial monitor to start playback
-  audio.stopPlayback();
-  }
+  if (digitalRead(2) == LOW){
+    digitalWrite(3, HIGH);
+  } else {
+    digitalWrite(3, LOW);
+    }
 }
