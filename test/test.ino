@@ -53,10 +53,11 @@ void setup(){
 
 
 void loop(){  
-
-  if (digitalRead(2) == LOW){
-    digitalWrite(3, HIGH);
-  } else {
-    digitalWrite(3, LOW);
-    }
+  if(digitalRead(2) == LOW){     
+      audio.play("au832d.wav");
+  }
+   
+  if(digitalRead(2) == HIGH){ //send the letter p over the serial monitor to start playback
+  audio.disable();
+  }
 }
