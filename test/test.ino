@@ -13,6 +13,8 @@ SdVolume volume;
 SdFile root;
 const int chipSelect = 10;
 
+byte cunt; 
+
 void setup(){
  
   pinMode(2, INPUT);
@@ -20,17 +22,17 @@ void setup(){
   audio.speakerPin = 9; //5,6,11 or 46 on Mega, 9 on Uno, Nano, etc
 
   Serial.begin(115200);
-  if (!SD.begin(chipSelect)) {  // see if the card is present and can be initialized:
+  if(!SD.begin(chipSelect)) {  // see if the card is present and can be initialized:
     Serial.println("SD fail");  
     return;   // don't do anything more if not
   }
-   audio.play("au832d.wav");
+  
   audio.setVolume(1);
   audio.quality(1);
 
    // we'll use the initialization code from the utility libraries
   // since we're just testing if the card is working!
-  if (!card.init(SPI_HALF_SPEED, chipSelect)) {
+  if(!card.init(SPI_HALF_SPEED, chipSelect)) {
     Serial.println("initialization failed. Things to check:");
     Serial.println("* is a card inserted?");
     Serial.println("* is your wiring correct?");
@@ -41,7 +43,7 @@ void setup(){
   }
 
    // Now we will try to open the 'volume'/'partition' - it should be FAT16 or FAT32
-  if (!volume.init(card)) {
+  if(!volume.init(card)) {
     Serial.println("Could not find FAT16/FAT32 partition.\nMake sure you've formatted the card");
     while (1);
   }
@@ -49,17 +51,28 @@ void setup(){
   // list all files in the card with date and size
   root.openRoot(volume);
   root.ls(LS_R | LS_DATE | LS_SIZE);
-   
+  
 }
 
 
 
-void loop(){  
-  if(digitalRead(2) == LOW){     
-      audio.play("au832d.wav");
-  }
+void loop(){
+  Serial.println(cunt);
+  delay(2000);
+  // if(Serial.available() > 0){
+
+  //   SD.open("au832d.wav"); 
+  //   if(digitalRead(2) == LOW)
+  //     Serial.write(cunt);
+  //     if(Serial.read() == cunt)
+  //       audio.play("au832d.wav");
+  // }
+
+  // if(digitalRead(2) == LOW){     
+  //     audio.play("au832d.wav");
+  // }
    
-  if(digitalRead(2) == HIGH){ //send the letter p over the serial monitor to start playback
-  audio.disable();
-  }
+  // if(digitalRead(2) == HIGH){ //send the letter p over the serial monitor to start playback
+  // audio.disable();
+  // }
 }
