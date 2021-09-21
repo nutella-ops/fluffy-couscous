@@ -26,8 +26,7 @@ august 2021
 	27 - 3.58 hrs.
 	29 - 2.94 hrs.
 	31 - 0.91 hrs.
-september 2021
-	
+september 2021	
 	3 - 1.33 hrs.
 	4 - 3.42 hrs.
 	6 - 2.75 hrs.
@@ -39,3 +38,6 @@ september 2021
 	14 - 6.16 hrs.
 	16 - 1.66 hrs.
 	17 - 9 hrs.
+	19 - 2.5 hrs.
+	18 - 3.33 hrs.
+	21 - 2.5 hrs.
