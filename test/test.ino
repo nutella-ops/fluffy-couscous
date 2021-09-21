@@ -14,6 +14,7 @@ SdFile root;
 const int chipSelect = 10;
 
 void setup(){
+ 
   pinMode(2, INPUT);
   pinMode(3, OUTPUT);
   audio.speakerPin = 9; //5,6,11 or 46 on Mega, 9 on Uno, Nano, etc
@@ -23,6 +24,7 @@ void setup(){
     Serial.println("SD fail");  
     return;   // don't do anything more if not
   }
+   audio.play("au832d.wav");
   audio.setVolume(1);
   audio.quality(1);
 
