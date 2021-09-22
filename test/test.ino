@@ -57,6 +57,7 @@ void setup(){
 
 
 void loop(){
-  if (digitalRead(2) == LOW)
-  Serial.println(Byte);
+  if (digitalRead(2) == LOW){ 
+      audio.play("au832d.wav");
+  }
 }
