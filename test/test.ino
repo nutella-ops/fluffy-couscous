@@ -54,10 +54,17 @@ void setup(){
   
 }
 
+<<<<<<< Updated upstream
 
 
 void loop(){
   if (digitalRead(2) == HIGH){ 
       audio.play("au832d.wav");
   }
+=======
+void loop() {  
+  if (digitalRead(2) == LOW && !audio.isPlaying()) {
+    audio.play("au832d.wav");
+  } 
+>>>>>>> Stashed changes
 }
