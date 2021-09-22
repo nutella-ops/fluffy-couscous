@@ -57,7 +57,7 @@ void setup(){
 
 
 void loop(){
-  if (digitalRead(2) == LOW){ 
+  if (digitalRead(2) == HIGH){ 
       audio.play("au832d.wav");
   }
 }
