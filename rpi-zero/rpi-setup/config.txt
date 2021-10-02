@@ -55,7 +55,8 @@
 
 # Enable audio (loads snd_bcm2835)
 dtparam=audio=on
-
+gpio=13,18=a5 # gpio ALT5 pin assignment, oct 2, 2021, "https://www.youtube.com/watch?v=KWY_wI-7vEM"
+ 
 [pi4]
 # Enable DRM VC4 V3D driver on top of the dispmanx display stack
 dtoverlay=vc4-fkms-v3d
@@ -64,5 +65,5 @@ max_framebuffers=2
 [all]
 #dtoverlay=vc4-fkms-v3d
 
-# Enable UART, added during adafruit setup 
- enable_uart=1
+# audio jack, oct, 2, 2021, "https://www.raspberrypi.org/forums/viewtopic.php?p=1782767"
+dtoverlay=audremap,enable_jack=on
