@@ -54,7 +54,7 @@
 # Additional overlays and parameters are documented /boot/overlays/README
 
 # Enable audio (loads snd_bcm2835)
-dtparam=audio=on
+# dtparam=audio=on 	# commented out oct 2, 2021 during DAC addition 
 gpio=13,18=a5 # gpio ALT5 pin assignment, oct 2, 2021, "https://www.youtube.com/watch?v=KWY_wI-7vEM"
  
 [pi4]
@@ -67,3 +67,7 @@ max_framebuffers=2
 
 # audio jack, oct, 2, 2021, "https://www.raspberrypi.org/forums/viewtopic.php?p=1782767"
 dtoverlay=audremap,enable_jack=on
+
+# I2S & DAC overlays
+dtoverlay=hifiberry-dac
+dtoverlay=i2s-mmap
