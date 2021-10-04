@@ -5,16 +5,16 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(12, GPIO.IN) # phys 32
-GPIO.setup(20, GPIO.OUT) # phys 38
+GPIO.setup(12, GPIO.OUT) # phys 32
+GPIO.setup(20, GPIO.IN) # phys 38
 
-
-led = GPIO.output(20, True)
+def led(logic):
+	GPIO.output(12, logic)
 
 while True:
-	GPIO.output(20, True)
+	led(True)
 	time.sleep(1)
-	GPIO.output(20, False)
+	led(False)
 	time.sleep(1)
 
 	# motionSensor = GPIO.input(12)
