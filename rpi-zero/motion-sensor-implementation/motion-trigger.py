@@ -12,12 +12,9 @@ pirSensor = 20
 # I/O definitions
 gpio.setup(led, gpio.OUT) # phys 32
 gpio.setup(pirSensor, gpio.IN) # phys 38
-ledOn = gpio.output(led, True)
-ledOff = gpio.output(led, False)
-motionData = gpio.input(pirSensor)
 
 while True:
-	if motionData == True:
-		ledOn
+	if gpio.input(pirSensor) == True:
+		gpio.output(led, True)
 	else:
-		ledOff
+		gpio.output(led, False)
