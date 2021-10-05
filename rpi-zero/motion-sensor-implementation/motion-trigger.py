@@ -1,22 +1,23 @@
 #!/usr/bin/python3
 
-import RPi.GPIO as GPIO
+import RPi.GPIO as gpio
 import time
 
-GPIO.setmode(GPIO.BCM)
+gpio.setmode(gpio.BCM)
 
-GPIO.setup(12, GPIO.OUT) # phys 32
-GPIO.setup(20, GPIO.IN) # phys 38
+# give pin numbers a name
+led = 12
+pirSensor = 20
 
-def led(logic):
-	GPIO.output(12, logic)
+# I/O definitions
+gpio.setup(led, gpio.OUT) # phys 32
+gpio.setup(pirSensor, gpio.IN) # phys 38
+ledOn = gpio.output(led, True)
+ledOff = gpio.output(led, False)
+motionData = gpio.input(pirSensor)
 
 while True:
-	led(True)
-	time.sleep(1)
-	led(False)
-	time.sleep(1)
-
-	# motionSensor = GPIO.input(12)
-	# if motionSensor == True:
-	# 	GPIO.output(20, motionSensor)
+	if motionData == True:
+		ledOn
+	else:
+		ledOff
