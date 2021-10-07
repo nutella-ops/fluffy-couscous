@@ -1,0 +1,28 @@
+# Required-Start: $remote_fs $syslog $network
+# Required-Stop: $remote_fs $syslog $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: ZK/U Klimakunst Tree
+# Description: config to run ZK/U Music Tree Project on startup
+### END INIT INFO
+
+#! /bin/sh
+# /etc/init.d/music_tree
+
+export HOME
+case "$1" in
+   start)
+      echo "Starting ZK/U Music Tree"
+      sudo /home/pi/motion-trigger.py 2>&1 &
+   ;;
+stop)
+   echo "Stopping ZK/U Music Tree"
+   PID='ps auxwww | grep motion-trigger.py | head -1 | awk '{print $2}''
+   kill -9 $PID
+   ;;
+*)
+   echo "Usage: /etc/init.d/music_tree {start|stop}"
+   exit 1
+;;
+esac
+exit 0

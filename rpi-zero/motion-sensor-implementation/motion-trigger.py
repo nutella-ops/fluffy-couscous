@@ -16,10 +16,10 @@ while True:
 	if gpio.input(pirSensor) == True:
 		if gpio.input(SPDT) == False:
 			time.sleep(2)	# 2 second delay in audio output so audio doesn't start immedately on movement 
-			os.system('aplay ~/full-deutsch.wav')
+			os.system('aplay /home/pi/full-deutsch.wav')
 			time.sleep(40)	# 40 second delay to prevent immediate retriggering
 		
 		if gpio.input(SPDT) == True:
 			time.sleep(2)	# 2 second delay in audio output so audio doesn't start immedately on movement 
-			os.system('aplay ~/full-english.wav')
-			time.sleep(40)	# 40 second delay to prevent immediate retriggering
+			os.system('aplay /home/pi/full-english.wav')
+			time.sleep(40  )	# 40 second delay to prevent immediate retriggering
