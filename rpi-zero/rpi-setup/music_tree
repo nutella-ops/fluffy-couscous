@@ -13,12 +13,12 @@ export HOME
 case "$1" in
    start)
       echo "Starting ZK/U Music Tree"
-      sudo /home/pi/motion-trigger.py 2>&1 &
+      /home/pi/motion-trigger.py 2>&1 &
    ;;
 stop)
    echo "Stopping ZK/U Music Tree"
    # PID='ps auxwww | grep aplay | head -2 | awk '{print $2}''
-   sudo kill $(ps auxwww|egrep "\.wav|\.py" | awk '{print $2}')
+   kill $(ps auxwww|egrep "\.wav|\.py" | awk '{print $2}')
    ;;
 *)
    echo "Usage: /etc/init.d/music_tree {start|stop}"
