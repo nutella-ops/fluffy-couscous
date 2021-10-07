@@ -17,8 +17,8 @@ case "$1" in
    ;;
 stop)
    echo "Stopping ZK/U Music Tree"
-   PID='ps auxwww | grep motion-trigger.py | head -1 | awk '{print $2}''
-   kill -9 $PID
+   # PID='ps auxwww | grep aplay | head -2 | awk '{print $2}''
+   sudo kill $(ps auxwww|egrep "\.wav|\.py" | awk '{print $2}')
    ;;
 *)
    echo "Usage: /etc/init.d/music_tree {start|stop}"
