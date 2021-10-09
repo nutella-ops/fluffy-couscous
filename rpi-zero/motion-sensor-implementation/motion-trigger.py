@@ -4,42 +4,26 @@ import RPi.GPIO as gpio, time, os
 
 gpio.setmode(gpio.BCM)
 
-# Named the Pins (BCM referenced)
+# Name the Pins
 languageSelect = 12
 pirSensor = 20
-ledGreen = 8
-ledYellow = 10
 
 # Time Definitions
-calibDelay = 45	# suggested calibration times {min. = 30 seconds, max. = 60} ideally, there should be as little movement as possible during calibration 
+calibDelay = 45	# min. suggested = 30 seconds, max. suggested = 60
 preDelay = 2	# delay before audio starts
 postDelay = 40	# delay before audio can start again
-delayCountdown = time.sleep(calibDelay) # calibration delay stored in a variable to be counted
 
 # I/O definitions
 gpio.setup(languageSelect, gpio.IN) # phys 32
 gpio.setup(pirSensor, gpio.IN) # phys 38
-gpio.setup(ledGreen, gpio.OUT)
-gpio.setup(ledYellow, gpio.OUT)
-
-# Setup Dialog
-def tenSecond(pin):
-		gpio.output(pin, True)
-		time.sleep(0.5)
-		gpio.output(pin, False)
-
-print("Calibrating...")
-if delayCountdown != 0:
-	while delayCountdown <= 10:
-		tenSecond(ledGreen)
-		tenSecond(ledYellow)
-gpio.output(ledGreen, False)
-gpio.output(ledYellow, False)
-print("Calibration Complete.")
-
-# Named the language switch positions
 left = False
 right = True
+
+
+# Setup Dialog
+print("Calibrating...")
+time.sleep(calibDelay)
+print("Calibration Complete.")
 
 while True:
 	if gpio.input(pirSensor) == True:
