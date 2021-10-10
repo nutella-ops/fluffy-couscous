@@ -2,7 +2,12 @@
 
 import RPi.GPIO as gpio, time, os
 
+# Use BCM numbers to reference pins
 gpio.setmode(gpio.BCM)
+
+# Audio File Definitions
+deutsch = 'full-deutsch.wav'
+english = 'full-english.wav' 
 
 # Named the Pins (BCM referenced)
 languageSelect = 12
@@ -19,7 +24,6 @@ retrigDelay = 4	# delay before audio can start again
 def calib(t):
 	while t > 0:
 		time.sleep(1)
-		print(t)
 		t -= 1
 
 # I/O definitions
@@ -54,7 +58,7 @@ while True:
 			time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
 			gpio.output(ledGreen, False)
 			gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive 
-			os.system('aplay /usr/share/sounds/alsa/Front_Center.wav')
+			os.system('aplay /home/pi/' + deutsch)
 			time.sleep(retrigDelay)	# delay to prevent immediate retriggering
 			gpio.output(ledRed, False)	# turn red led on to inidicate triggering is active 
 			gpio.output(ledGreen, True)
@@ -64,7 +68,7 @@ while True:
 			time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
 			gpio.output(ledGreen, False)
 			gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive 
-			os.system('aplay /usr/share/sounds/alsa/Rear_Center.wav')
+			os.system('aplay /home/pi/' + english)
 			time.sleep(retrigDelay)	# delay to prevent immediate retriggering
 			gpio.output(ledRed, False)	# turn red led on to inidicate triggering is active 
 			gpio.output(ledGreen, True)
