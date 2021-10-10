@@ -11,10 +11,11 @@ ledGreen = 8
 ledYellow = 10
 
 # Time Definitions
-calibDelay = 45	# suggested calibration times {min. = 30 seconds, max. = 60} ideally, there should be as little movement as possible during calibration 
+calibNominal = 45	# suggested calibration times {min. = 30 seconds, max. = 60} ideally, there should be as little movement as possible during calibration 
 preDelay = 2	# delay before audio starts
 postDelay = 40	# delay before audio can start again
-delayCounter = 45 # calibration delay stored in a variable to be counted
+calibRemain = 10 # the length of led indication in seconds
+calibPractical = abs(calibNominal - calibRemain) # setting aside 10 seconds for led indication, assigning the remainder as the calibDelay
 
 # I/O definitions
 gpio.setup(languageSelect, gpio.IN) # phys 32
@@ -23,19 +24,28 @@ gpio.setup(ledGreen, gpio.OUT)
 gpio.setup(ledYellow, gpio.OUT)
 
 # Setup Dialog
-def tenSecond(pin):
+def blink(pin):
 		gpio.output(pin, True)
-		time.sleep(0.5)
+		time.sleep(1)
 		gpio.output(pin, False)
 
+def ledIndicator(time):
+	while time <= 10:
+		blink(ledGreen)
+		time -= 1
+		blink(ledYellow)
+		time -= 1
+
+
 print("Calibrating...")
-if delayCounter != 0:
-	while calibDelay <= 10:
-		tenSecond(ledGreen)
-		tenSecond(ledYellow)
-	delayCounter -= 1
-gpio.output(ledGreen, False)
-gpio.output(ledYellow, False)
+while calibPractical > 0:
+	time.sleep(1)
+	print(calibPractical)
+	calibPractical -= 1
+
+ledIndicator(calibRemain)
+# gpio.output(ledGreen, False)
+# gpio.output(ledYellow, False)
 print("Calibration Complete.")
 
 # Named the language switch positions
