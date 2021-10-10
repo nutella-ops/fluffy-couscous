@@ -7,8 +7,8 @@ gpio.setmode(gpio.BCM)
 # Named the Pins (BCM referenced)
 languageSelect = 12
 pirSensor = 20
-ledGreen = 8
-ledYellow = 10
+ledGreen = 14 # phys 8
+ledYellow = 15 # phys 10
 
 # Time Definitions
 calibNominal = 45	# suggested calibration times {min. = 30 seconds, max. = 60} ideally, there should be as little movement as possible during calibration 
@@ -30,22 +30,15 @@ def blink(pin):
 		gpio.output(pin, False)
 
 def ledIndicator(time):
-	while time <= 10:
-		blink(ledGreen)
-		time -= 1
-		blink(ledYellow)
-		time -= 1
-
+	if time <= 10:
+		while time > 0:
+			blink(ledGreen)
+			time -= 1
+			blink(ledYellow)
+			time -= 1
 
 print("Calibrating...")
-while calibPractical > 0:
-	time.sleep(1)
-	print(calibPractical)
-	calibPractical -= 1
-
 ledIndicator(calibRemain)
-# gpio.output(ledGreen, False)
-# gpio.output(ledYellow, False)
 print("Calibration Complete.")
 
 # Named the language switch positions
