@@ -2,12 +2,14 @@
 
 import RPi.GPIO as gpio, time, os
 
+### GENERAL SETUP ###
+
 # Use BCM numbers to reference pins
 gpio.setmode(gpio.BCM)
 
 # Audio File Definitions
 DE = 'full-deutsch.wav'
-EN = 'full-english.wav' 
+EN = 'en-bg-remove.wav' 
 
 # Named the Pins (BCM referenced)
 languageSelect = 12
@@ -16,9 +18,9 @@ ledRed = 23 # phys 16
 ledGreen = 24 # phys 18
 
 # Time Definitions
-calibTime = 4	# suggested calibration times {min. = 30 seconds, max. = 60} ideally, there should be as little movement as possible during calibration 
-preDelay = 3	# delay before audio starts
-retrigDelay = 4	# delay before audio can start again
+calibTime = 40	# suggested calibration times {min. = 30 seconds, max. = 60} ideally, there should be as little movement as possible during calibration 
+preDelay = 3	# seconds before audio starts
+retrigDelay = 40	# seconds before audio can start again
 
 # I/O definitions
 gpio.setup(languageSelect, gpio.IN) # phys 32
@@ -42,6 +44,14 @@ def calib(t):
 		time.sleep(0.5)
 		t -= 1
 
+# Initialization Function
+def init(t):
+	gpio.output(ledRed, True) 
+	print("Calibrating...")
+	calib(t)
+	print("Calibration Complete.")
+	gpio.output(ledRed, False)
+	gpio.output(ledGreen, True)
 
 # Motion Greeting and Status Indicator
 def greeting(language):
@@ -59,12 +69,7 @@ def greeting(language):
 ### MAIN PROGRAM ###
 
 # Initalization Display
-gpio.output(ledRed, True) 
-print("Calibrating...")
-calib(calibTime)
-print("Calibration Complete.")
-gpio.output(ledRed, False)
-gpio.output(ledGreen, True)
+init(calibTime)
 
 # Named the language switch positions
 left = False
