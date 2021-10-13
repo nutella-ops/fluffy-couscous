@@ -44,15 +44,15 @@ def calib(t):
 
 
 # Motion Greeting and Status Indicator
-# def greeting(audio)
-# 	gpio.output(ledGreen, True) # continue LED green from initialization?
-# 	time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
-# 	gpio.output(ledGreen, False)
-# 	gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive 
-# 	os.system('aplay /home/pi/' + audio)
-# 	time.sleep(retrigDelay)	# delay to prevent immediate retriggering
-# 	gpio.output(ledRed, False)	# turn red led on to inidicate triggering is active 
-# 	gpio.output(ledGreen, True)	# 
+def greeting(language):
+	gpio.output(ledGreen, True) # continue LED green from initialization?
+	time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
+	gpio.output(ledGreen, False)
+	gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive 
+	os.system('aplay /home/pi/' + language)
+	time.sleep(retrigDelay)	# delay to prevent immediate retriggering
+	gpio.output(ledRed, False)	# turn red led on to inidicate triggering is active 
+	gpio.output(ledGreen, True)	# 
 
 
 
@@ -73,21 +73,7 @@ right = True
 while True:
 	if gpio.input(pirSensor) == True:
 		if gpio.input(languageSelect) == left:
-			gpio.output(ledGreen, True)
-			time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
-			gpio.output(ledGreen, False)
-			gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive 
-			os.system('aplay /home/pi/' + DE)
-			time.sleep(retrigDelay)	# delay to prevent immediate retriggering
-			gpio.output(ledRed, False)	# turn red led on to inidicate triggering is active 
-			gpio.output(ledGreen, True)
+			greeting(DE)
 		
 		if gpio.input(languageSelect) == right:
-			gpio.output(ledGreen, True)
-			time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
-			gpio.output(ledGreen, False)
-			gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive
-			os.system('aplay /home/pi/' + EN)
-			time.sleep(retrigDelay)	# delay to prevent immediate retriggering
-			gpio.output(ledRed, False)	# turn red led on to inidicate triggering is active
-			gpio.output(ledGreen, True)
+			greeting(EN)
