@@ -2,13 +2,16 @@
 
 import RPi.GPIO as gpio, time, os
 
+
+#####################
 ### GENERAL SETUP ###
+#####################
 
 # Use BCM numbers to reference pins
 gpio.setmode(gpio.BCM)
 
 # Audio File Definitions
-DE = 'full-deutsch.wav'
+DE = 'de-bg-remove.wav'
 EN = 'en-bg-remove.wav' 
 
 # Named the Pins (BCM referenced)
@@ -27,13 +30,13 @@ gpio.setup(languageSelect, gpio.IN) # phys 32
 gpio.setup(pirSensor, gpio.IN) # phys 38
 gpio.setup(ledGreen, gpio.OUT)
 gpio.setup(ledRed, gpio.OUT)
-
-# Start-up Conditions
-gpio.output(ledRed, False)
-gpio.output(ledGreen, False)
+left = False	# named the switch positions
+right = True
 
 
+############################
 ### FUNCTION DEFINITIONS ###
+############################
 
 # Calibration Functon
 def calib(t):
@@ -55,7 +58,7 @@ def init(t):
 
 # Motion Greeting and Status Indicator
 def greeting(language):
-	gpio.output(ledGreen, True) # continue LED green from initialization?
+	# gpio.output(ledGreen, True) # continue LED green from initialization?
 	time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
 	gpio.output(ledGreen, False)
 	gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive 
@@ -65,16 +68,18 @@ def greeting(language):
 	gpio.output(ledGreen, True)	# 
 
 
-
+####################
 ### MAIN PROGRAM ###
+####################
+
+# Start-up Conditions
+gpio.output(ledRed, False)
+gpio.output(ledGreen, False)
 
 # Initalization Display
 init(calibTime)
 
-# Named the language switch positions
-left = False
-right = True
-
+# Motion Sensor Loop
 while True:
 	if gpio.input(pirSensor) == True:
 		if gpio.input(languageSelect) == left:
