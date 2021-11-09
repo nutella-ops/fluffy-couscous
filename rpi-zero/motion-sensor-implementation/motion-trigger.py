@@ -15,19 +15,20 @@ DE = 'de-bg-remove.wav'
 EN = 'en-bg-remove.wav' 
 
 # Named the Pins (BCM referenced)
-languageSelect = 12
-pirSensor = 20
+languageSelect = 12	# phys 32
+pirSensor = 20	# phys 38
 ledRed = 23 # phys 16
 ledGreen = 24 # phys 18
 
 # Time Definitions
+startDelay = 5	# seconds before calibration starts
 calibTime = 40	# suggested calibration times {min. = 30 seconds, max. = 60} ideally, there should be as little movement as possible during calibration 
 preDelay = 3	# seconds before audio starts
 retrigDelay = 40	# seconds before audio can start again
 
 # I/O definitions
-gpio.setup(languageSelect, gpio.IN) # phys 32
-gpio.setup(pirSensor, gpio.IN) # phys 38
+gpio.setup(languageSelect, gpio.IN) 
+gpio.setup(pirSensor, gpio.IN) 
 gpio.setup(ledGreen, gpio.OUT)
 gpio.setup(ledRed, gpio.OUT)
 left = False	# named the switch positions
@@ -37,6 +38,16 @@ right = True
 ############################
 ### FUNCTION DEFINITIONS ###
 ############################
+
+# LED Abstraction, Green to Red
+def greenToRed():
+	gpio.output(ledGreen, False)
+	gpio.output(ledRed, True)
+
+# LED Abstraction, Red to Green
+def redToGreen():
+	gpio.output(ledRed, False)
+	gpio.output(ledGreen, True)
 
 # Calibration Functon
 def calib(t):
@@ -58,14 +69,11 @@ def init(t):
 
 # Motion Greeting and Status Indicator
 def greeting(language):
-	# gpio.output(ledGreen, True) # continue LED green from initialization?
-	time.sleep(preDelay)	# 2 second delay in audio output so audio doesn't start immedately on movement
-	gpio.output(ledGreen, False)
-	gpio.output(ledRed, True)	# turn red led on to inidicate triggering is inactive 
+	time.sleep(preDelay) # delay in audio output so audio doesn't start immedately on movement
+	greenToRed()
 	os.system('aplay /home/pi/' + language)
-	time.sleep(retrigDelay)	# delay to prevent immediate retriggering
-	gpio.output(ledRed, False)	# turn red led on to inidicate triggering is active 
-	gpio.output(ledGreen, True)	# 
+	time.sleep(retrigDelay) # delay to prevent immediate retriggering
+	redToGreen()
 
 
 ####################
@@ -75,6 +83,9 @@ def greeting(language):
 # Start-up Conditions
 gpio.output(ledRed, False)
 gpio.output(ledGreen, False)
+
+# Start-up Delay
+time.sleep(startDelay)
 
 # Initalization Display
 init(calibTime)
