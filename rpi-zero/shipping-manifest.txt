@@ -1,1 +1,50 @@
-/Users/macbook/work_area/income/uba-chan-plant-music/fileshare/shipping-manifest.txt
+#############
+# Überblick #
+#############
+
+Das Gerät ist Teil eines Kunstprojektes namens "AHORN X HUMAN II" für ZK/U. Das Gerät besteht aus einem eingebetteten Computer (RPI), einem digitalen Audiowandler (DAC), einem Audioverstärker (AMP), einem Bewegungssensor (PIR), einer Leuchtdiode (LED) und einem mechanischen Schalter. Die Makrofunktion des Geräts besteht darin, eine Audiodatei mit gesprochenem Wort abzuspielen, wenn der Bewegungssensor aktiviert wird. Es soll an einem Baum befestigt werden, um den Baum zu personifizieren.
+
+################
+# Einzelheiten #
+################
+
+Der Computer ist ein Raspberry Pi Zero mit Wifi unter Verwendung des Debian-Betriebssystems (Raspbian) und das Programm ist in Python 3 geschrieben. Der Computer überwacht die PIR-Ausgabe. Wenn PIR aktiviert wird, sendet RPI die Audiodatei an den DAC und wandelt das digitale Signal in ein analoges Signal um. Das analoge Signal wird an AMP gesendet. AMP sendet das analoge Signal an einen Lautsprecher (nicht im Lieferumfang enthalten). Die Dateien sind die gleiche Sprache, aufgenommen in Englisch und Deutsch. Der Schalter bestimmt die Sprache. RPI wird mit USB-Strom (+5 Volt) über ein USB-Kabel [Typ A, Micro B] betrieben. Peripherie läuft auf USB über RPI.
+
+ZK/U-Projekt: https://www.zku-berlin.org/timeline/ahorn-x-human-ii/
+Python-Quellcode: https://github.com/nutella-ops/fluffy-couscous/blob/master/rpi-zero/motion-sensor-implementation/motion-trigger.py
+RPI: https://www.microcenter.com/product/486575/raspberry-pi-zero-w
+DAC: https://www.adafruit.com/product/3678
+AMP: https://www.adafruit.com/product/2130
+PIR: https://www.adafruit.com/product/189
+LED: Rote und grüne LED in Kombination. Der mittlere Stift ist geschliffen. Die beiden verbleibenden Pins sind die Anoden der jeweiligen LEDs.
+Schalter: Single Input, Dual Output (SPDT)
+
+Hinweis: Ignorieren Sie die Drahtfarben im Schaltplan, da sie nicht mehr mit den physischen Drähten übereinstimmen.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+############
+# Overview #
+############
+
+The device is part of an art project named "AHORN X HUMAN II" for ZK/U. The device comprises an embedded computer (RPI), digital audio converter (DAC), audio amplifier (AMP), motion sensor (PIR), light emitting diode (LED) and mechanical switch. The macro function of the device is to play an audio file of spoken word when the motion sensor is activated. It is meant to be attached to a tree to personify the tree.
+
+###########
+# Details #
+###########
+
+The computer is a Raspberry Pi Zero with Wifi using Debian operating system (Raspbian) and the program is written in Python 3. The computer monitors PIR output. When PIR activates RPI sends the audio file to DAC, converting the digital signal to an analog signal. The analog signal is sent to AMP. AMP sends the analog signal to a speaker (not included). The files are the same speech, recorded in english and german. The swtich determines the language. RPI runs on USB power (+5 volts) using a [Type A, Micro B] USB cable. Peripherals run on USB via RPI.
+
+ZK/U Project: https://www.zku-berlin.org/timeline/ahorn-x-human-ii/
+Python Source Code: https://github.com/nutella-ops/fluffy-couscous/blob/master/rpi-zero/motion-sensor-implementation/motion-trigger.py
+RPI: https://www.microcenter.com/product/486575/raspberry-pi-zero-w
+DAC: https://www.adafruit.com/product/3678
+AMP: https://www.adafruit.com/product/2130
+PIR: https://www.adafruit.com/product/189
+LED: Red and Green LED in combination. The middle pin is ground. The two remaining pins are the anodes of the respective LEDs.
+Switch: Single Input, Dual Output (SPDT)
+
+Note: Disregard the wire colors in the schematic as they no longer match the physical wires.
